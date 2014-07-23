@@ -111,12 +111,18 @@
         pluck(characters, 'name'); // ['barney', 'fred']
 
     Такая функция есть в lodash: http://lodash.com/docs#pluck
+    
+    Функция не должна изменять исходный массив.
 
 9. напиши функцию `filter`, которая принимает функцию-предикат и массив. Возвращает она массив значений, для которых предикат вернет true.
 
         var input = [1, 2, 3, 4, 5, 6];
         function isEven(x) { return x % 2 == 0; } // проверяет на четность
         console.log(filter(isEven, input)); // [2, 4, 6]
+        
+    Функция не должна изменять исходный массив:
+    
+        console.log(input); // [1, 2, 3, 4, 5, 6]
     
     Аналог из loash: http://lodash.com/docs#filter
     В новых браузерах у массивов есть метод `filter`.
