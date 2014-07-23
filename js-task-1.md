@@ -93,9 +93,9 @@
         var ctx = { x: 2 };
     
         function testThis() { console.log(this.x); }
-        testThis(); // 1
+        console.log(testThis()); // 1
         var boundFunction = bind(testThis, ctx);
-        boundFunction(); // 2
+        console.log(boundFunction()); // 2
 
     В новых браузерах и функций есть метод `bind()`, делающий аналогичную вещь: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind
     
@@ -108,7 +108,7 @@
           { 'name': 'fred', 'age': 40 }
         ];
     
-        pluck(characters, 'name'); // ['barney', 'fred']
+        console.log(pluck(characters, 'name')); // ['barney', 'fred']
 
     Такая функция есть в lodash: http://lodash.com/docs#pluck
     
@@ -130,14 +130,14 @@
 10. Напиши функцию, считающую число свойств в объекте:
 
         var a = { a: 1, b: 2 };
-        count(a); // 2
+        console.log(count(a)); // 2
         var b = function () {};
-        count(b); // 0
+        console.log(count(b)); // 0
         var с = [1, 2, 3];
-        count(c); // 3
+        console.log(count(c)); // 3
         var d = [];
         d[100] = 1;
-        count(d); // 1    
+        console.log(count(d)); // 1    
         
 11. дан список вида «страна, город, население»: http://ru.wikipedia.org/wiki/%D0%A1%D0%B0%D0%BC%D1%8B%D0%B5_%D0%BD%D0%B0%D1%81%D0%B5%D0%BB%D1%91%D0%BD%D0%BD%D1%8B%D0%B5_%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B8%D0%B5_%D0%B0%D0%B3%D0%BB%D0%BE%D0%BC%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D0%B8#.D0.98.D1.81.D0.BF.D0.BE.D0.BB.D1.8C.D0.B7.D0.BE.D0.B2.D0.B0.D0.BD.D0.BD.D1.8B.D0.B5_.D0.BC.D0.B5.D1.82.D0.BE.D0.B4.D1.8B
 
