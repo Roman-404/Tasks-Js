@@ -247,6 +247,10 @@ CSSOM = CSS Object Model — это свойства и методы этих о
 - http://learn.javascript.ru/events-and-interfaces
 - http://learn.javascript.ru/css-for-js
 
+Информация о поддержке а браузере тех или иных фич: http://caniuse.com/
+Таблица свойств CSSOM: http://www.quirksmode.org/dom/w3c_cssom.html
+Таблица видов событий: http://www.quirksmode.org/dom/events/
+
 Задачки надо решать без использования сторонних библиотек (вроде JQuery).
 
 Задачки:
