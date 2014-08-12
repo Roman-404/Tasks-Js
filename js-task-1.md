@@ -371,6 +371,27 @@ CSSOM = CSS Object Model — это свойства и методы этих о
 
 Дан узел DOM. Сделай функции `dom.hasClass(node, klass)`, a`dom.addClass(node, klass)`, `dom.removeClass(node, klass)` (`dom` — это обычный объект `{}`), которые позволяют проверить, есть ли у элемента заданный CSS-класс, добавить к нему класс (если его еще нет) и удалить класс. 
 
+Если удалены все классы, то удалять аттрибут `class=""` не надо, пусть остается.
+
+Примеры: 
+
+    // вспомогательная функция для создания ноды
+    function createNode(name, klasses) {  
+        var n = document.createElement(name);
+        n.className = klasses;
+        return n;
+    }
+    
+    function l(x) {
+        console.log(x);
+    }
+    
+    l(hasClass(createNode('div', 'test'), 'test')); // true
+    l(hasClass(createNode('div', 'test'), 'tes')); // false
+    
+    l(hasClass(createNode('div', 'test1 test2'), 'tes')); // false
+    l(hasClass(createNode('div', 'test1 test2'), 'test1')); // true
+
 ### 2. Поле
 
 Сделай поле из белых клеточек (клеточка может иметь размер около 28×28 пикселей). При клике на клеточку она должна менять цвет на черный. Под таблицей должна быть кнопка «поменять цвета». При ее нажатии все цвета клеточек меняются на противоположные.
