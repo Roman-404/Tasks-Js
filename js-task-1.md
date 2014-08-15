@@ -391,6 +391,13 @@ CSSOM = CSS Object Model — это свойства и методы этих о
     
     l(hasClass(createNode('div', 'test1 test2'), 'tes')); // false
     l(hasClass(createNode('div', 'test1 test2'), 'test1')); // true
+    
+В современных браузерах и HTML 5 у узлов DOM есть объект classList для этого:
+
+- https://developer.mozilla.org/en-US/docs/Web/API/Element.classList (англ.)
+- http://html5.by/blog/javascript-classlist-api/
+
+Но решение должно работать и в браузерах без classList.
 
 ### 2. Поле
 
