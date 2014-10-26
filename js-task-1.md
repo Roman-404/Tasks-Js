@@ -269,7 +269,7 @@ Falsy (ложных? лживеньких?) значений ровно 7, их 
     
         console.log(input); // [1, 2, 3, 4, 5, 6]
     
-    Аналог из loash: http://lodash.com/docs#filter
+    Аналог из lodash: http://lodash.com/docs#filter
     В новых браузерах у массивов есть метод `filter`.
 
 10. Напиши функцию, считающую число свойств в объекте:
