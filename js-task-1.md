@@ -291,7 +291,7 @@ Falsy (ложных? лживеньких?) значений ровно 7, их 
         console.log(count(a)); // 2
         var b = function () {};
         console.log(count(b)); // 0
-        var с = [1, 2, 3];
+        var c = [1, 2, 3];
         console.log(count(c)); // 3
         var d = [];
         d[100] = 1;
