@@ -15,30 +15,34 @@
 
 Функции — это объекты. У них есть свойства (например `length`) и методы (например `toSource`, `apply` и `call`). Функции можно хранить в переменных, передавать и возвращать из других функций: 
 
-    var a = function (..) { ... }; // создаем новую функцию и поменщаем ссылку в a
-    a(); // вызываем
-    console.log(a.toString()); // вызваем метод у функции (он вернет ее текст)
+```javascript
+var a = function (..) { ... }; // создаем новую функцию и поменщаем ссылку в a
+a(); // вызываем
+console.log(a.toString()); // вызваем метод у функции (он вернет ее текст)
+```
 
 Функция **при создании** привязывается к набору переменных родительской функции и потому видит ее переменные:
 
-    function f1() {
-        var a = 1;
-        var b = 2;
-    
-        function f2() {
-            var d = 3;
-            var e = 4;
-            
-            ...(код 2)..
-            
-            return function () {
-                var f = 5;
-                ...(код 3)...
-            };
-        }
+```javascript
+function f1() {
+    var a = 1;
+    var b = 2;
+
+    function f2() {
+        var d = 3;
+        var e = 4;
         
-        ...(код 1)...
+        ...(код 2)..
+        
+        return function () {
+            var f = 5;
+            ...(код 3)...
+        };
     }
+    
+    ...(код 1)...
+}
+```
 
 - Код 1 видит переменные a, b и функцию f2 (и f1 тоже)
 - Код 2 видит свои переменные d, e, а также родительские a, b, и f2  (и f1 тоже)
@@ -52,14 +56,16 @@
 
 Локальные переменные (объявленные через var) создаются при входе в функцию, до выполнения ее кода. При этом им изначально присваивается undefined:
 
-        function test() {
-            console.log(a); // undefined
-        
-            var a = 2; 
-            console.log(a); // 2
-        }
-        
-        test();
+```javascript
+function test() {
+    console.log(a); // undefined
+
+    var a = 2; 
+    console.log(a); // 2
+}
+
+test();
+```
 
 Этот код выполняется так:
 
@@ -72,32 +78,38 @@
 
 Примитивные значения дублируются при копировании, копирование объектов просто копирует ссылку на один и тот же объект. Примитивные значения — это не-объекты, то есть `null`, `undefined`, числа, `true`/`false`, строки. Если ты их присваиваешь переменной, передаешь или возвращаешь из функции, создается новая независимая копия значения:
 
-    var a = "Hello";
-    var b = a; // В b независимая копия строки. Меняя ее, мы не изменяем то, что в a
-    
+```javascript
+var a = "Hello";
+var b = a; // В b независимая копия строки. Меняя ее, мы не изменяем то, что в a
+```
+
 Объекты (а это в том числе массивы (Array), функции (Function), регулярки (RegExp), даты (Date)) копируются и передаются в/из функции по ссылке:
 
-    var a = { x: 1, y: 2 };
-    var b = a; // в b ссылка на тот же самый объект, что и в a. Проверим:
-    b.x = 10;
-    console.log(a.x); // 10
-    
-    var с = [];
-    function changeArray(arr) { arr.push(1); } 
-    changeArray(с); // в функцию передается не копия, а ссылка на тот же массив. 
-    console.log(c); // [1]
-    
+```javascript
+var a = { x: 1, y: 2 };
+var b = a; // в b ссылка на тот же самый объект, что и в a. Проверим:
+b.x = 10;
+console.log(a.x); // 10
+
+var с = [];
+function changeArray(arr) { arr.push(1); } 
+changeArray(с); // в функцию передается не копия, а ссылка на тот же массив. 
+console.log(c); // [1]
+```
+
 ### Сравнение объектов
 
 Объекты (а значит и массивы, и функции, так как они тоже ими являются) сравниваются по идентичности, то есть тому, что это ссылки на один и тот же объект: 
 
-    var a = {};
-    var b = a;
-    console.log(a === b);  // true
-    var c = {};
-    var d = {};
-    conslole.log(c === d); // false
-    
+```javascript
+var a = {};
+var b = a;
+console.log(a === b);  // true
+var c = {};
+var d = {};
+conslole.log(c === d); // false
+```
+
 Во втором случае у нас 2 разных объекта и получается `false`. `{}` всегда создает **новый** объект. По этой причине `{} === {}`, `[] === []`, `function(){} === function(){}` всегда дают `false`. И вообще, любое сравнение объекта с `[]` или `{}` даст `false`. 
 
 Подробнее: http://javascript.ru/comparison-operators
@@ -106,98 +118,119 @@
 
 Falsy (ложных? лживеньких?) значений ровно 7, их надо знать наизусть: `0`, `-0` (да, в программировании есть отрицательный ноль), `NaN`, `null`, `undefined`, `''` (пустая строка), `false`. Все остальные значения truthy, в том числе `'0'` (строка из символа 0). При преобразовании в логический (булев) тип falsy значения преовращаются в `false`, а все остальные — в `true`:
 
-    console.log(0 ? "truthy" : "falsy"); // falsy
-    console.log('0' ? "truthy" : "falsy"); // truthy
-    console.log({} ? "truthy" : "falsy"); // truthy
-    console.log([] ? "truthy" : "falsy"); // truthy
-    console.log('' ? "truthy" : "falsy"); // falsy
-    if (1) { console.log('truthy'); } else { console.log('falsy'); } // truthy
-    
+```javascript
+console.log(0 ? "truthy" : "falsy"); // falsy
+console.log('0' ? "truthy" : "falsy"); // truthy
+console.log({} ? "truthy" : "falsy"); // truthy
+console.log([] ? "truthy" : "falsy"); // truthy
+console.log('' ? "truthy" : "falsy"); // falsy
+if (1) { console.log('truthy'); } else { console.log('falsy'); } // truthy
+```
+
 ### Боксинг
-    
+
 У примитивных значений (примитивные = не-объекты, то есть числа, строки, `true`/`false`/`null`/`undefined`) нет свойств и методов (они есть только у объектов). При попытке обратиться к свойствам/методам примитивов происходит *боксинг*: яваскрипт создает временный объект из примитива и обращается к нему (сам примитив остается неизменным). Для чисел создается объект «класса» Number, для `true`/`false` Boolean, для строк — String. Для `null` и `undefined` выдается ошибка. То есть код
 
-    var a = "abc";
-    var b = a.length;
-    
+```javascript
+var a = "abc";
+var b = a.length;
+```
+
 Превращается внутри в:
 
-    var a = "abc";
-    var tmp = new String(a); // происходит боксинг, создается временный объект
-    var b = tmp.length; // и идет обращение к свойству этого объекта
-    // почле чего объект выкилдывается
-    
+```javascript
+var a = "abc";
+var tmp = new String(a); // происходит боксинг, создается временный объект
+var b = tmp.length; // и идет обращение к свойству этого объекта
+// почле чего объект выкилдывается
+```
+
 Потому присвоить свойство примитиву можно, но оно не сохранится — ведь оно создалось на временном объекте.
 
-    var x = 1;
-    x.test = 2;
-    console.log('test' in x); // false — такого свойства у x нету
-    
+```javascript
+var x = 1;
+x.test = 2;
+console.log('test' in x); // false — такого свойства у x нету
+```
+
 Это легко объяснить, если записать что происходит с учетом боксинга:
 
-    var x = 1;
-    var tmp1 = new Number(x);
-    tmp1.test = 2; // свойство присвоилось временному объекту
-    var tmp2 = new Number(x);
-    console.log('test' in tmp2); // а ищем мы его уже в другом объекте, естественно его там нет
-    
+```javascript
+var x = 1;
+var tmp1 = new Number(x);
+tmp1.test = 2; // свойство присвоилось временному объекту
+var tmp2 = new Number(x);
+console.log('test' in tmp2); // а ищем мы его уже в другом объекте, естественно его там нет
+```
+
 ## Задачки на JS
-    
+
 1. Напиши функцию создания генератора `sequence(start, step)`. Она при вызове возвращает другую функцию-генератор, которая при каждом вызове дает число на 1 больше, и так до бесконечности. Начальное число, с которого начинать отсчет, и шаг, задается при создании генератора. Шаг можно не указывать, тогда он будет равен одному. Начальное значение по умолчанию равно 0. Генераторов можно создать сколько угодно.
 
-        var generator = sequence(10, 3);
-        var generator2 = sequence(7, 1);
-        
-        console.log(generator()); // 10
-        console.log(generator()); // 13
-        
-        console.log(generator2()); // 7
-        
-        console.log(generator()); // 16
-        
-        console.log(generator2()); // 8
+    ```javascript
+    var generator = sequence(10, 3);
+    var generator2 = sequence(7, 1);
+
+    console.log(generator()); // 10
+    console.log(generator()); // 13
+
+    console.log(generator2()); // 7
+
+    console.log(generator()); // 16
+
+    console.log(generator2()); // 8
+    ```
 
 2. Также, нужна функция `take(gen, x)` которая вызвает функцию `gen` заданное число (`x`) раз и возвращает массив с результатами вызовов. Она нам пригодится для отладки:
 
-        var gen2 = sequence(0, 2);
-        console.log(take(gen2, 5)); // [0, 2, 4, 6, 8 ]
-
+    ```javascript
+    var gen2 = sequence(0, 2);
+    console.log(take(gen2, 5)); // [0, 2, 4, 6, 8 ]
+    ```
 
 3. Напиши функцию `map(fn, array)`, которая принимает на вход функцию и массив, и обрабатывает каждый элемент массива этой функцией, возвращая новый массив. Пример: 
-        
-        function square(x) { return x * x; } // возведение в квадрат
-        console.log(map(square, [1, 2, 3, 4])); // [1, 4, 9, 16]
-        console.log(map(square, [])); // []
+            
+    ```javascript
+    function square(x) { return x * x; } // возведение в квадрат
+    console.log(map(square, [1, 2, 3, 4])); // [1, 4, 9, 16]
+    console.log(map(square, [])); // []
+    ```
 
     Обрати внимание: функция не должна изменять переданный ей массив: 
-    
+
+    ```javascript    
         var arr = [1, 2, 3];
         console.log(map(square, arr)); // [1, 4, 9]
         console.log(arr); // [1, 2, 3]
+    ```
 
     Это аналог `array_map` из PHP.
 
 4. Напиши функцию `fmap(a, gen)`, которая принимает на вход 2 функции, `a` и `gen`, где `gen` — функция-генератор вроде той, что была в первом задании. `fmap` возвращает новую функцию-генератор, которая при каждом вызове берет следующее значение из `gen` и пропускает его через функцию `a`. Пример: 
 
-        var gen = sequence(1, 1);
-        function square(x) { return x * x; }
-        var squareGen = fmap(square, gen);
-        
-        console.log(squareGen()); // 1
-        console.log(squareGen()); // 4
-        console.log(squareGen()); // 9
-        console.log(squareGen()); // 16
+    ```javascript
+    var gen = sequence(1, 1);
+    function square(x) { return x * x; }
+    var squareGen = fmap(square, gen);
+
+    console.log(squareGen()); // 1
+    console.log(squareGen()); // 4
+    console.log(squareGen()); // 9
+    console.log(squareGen()); // 16
+    ```
 
     А, еще, сделай тогда, чтобы в качестве `gen` можно было указать функцию с аргументами, и при вызове
 
-        function add(a, b) { 
-            return a + b; 
-        }
-        
-        // Мы получаем новую функцию, которая вызвает add, и результат пропускает через функцию square
-        var squareAdd = fmap(square, add);
-        console.log(squareAdd(2, 3)); // 25 = (2 + 3) ^ 2
-        console.log(squareAdd(5, 7)); // 144 = (5 + 7) ^ 2
+    ```javascript
+    function add(a, b) { 
+        return a + b; 
+    }
+
+    // Мы получаем новую функцию, которая вызвает add, и результат пропускает через функцию square
+    var squareAdd = fmap(square, add);
+    console.log(squareAdd(2, 3)); // 25 = (2 + 3) ^ 2
+    console.log(squareAdd(5, 7)); // 144 = (5 + 7) ^ 2
+    ```
 
     Эти аргументы бы передавались функции `gen`. Аргументов может быть любое количество.
 
@@ -207,6 +240,7 @@ Falsy (ложных? лживеньких?) значений ровно 7, их 
     
     Напиши функцию `partial(fn, a1, a2, ....)`, которая позволяет зафиксировать один или несколько аргументов функции. Пример: 
     
+    ```javascript
         function add(a, b) { return a + b; }
         function mult(a, b, c, d) { return a * b * c * d; }
         
@@ -220,6 +254,7 @@ Falsy (ложных? лживеньких?) значений ровно 7, их 
         
         console.log(mult23(4, 5)); // 2*3*4*5 = 120
         console.log(mult23(1, 1)); // 2*3*1*1 = 6
+    ```
 
     Есть функция с аргументами: 
 
@@ -419,30 +454,32 @@ CSSOM = CSS Object Model — это свойства и методы этих о
 
 Дан узел DOM. Сделай функции `dom.hasClass(node, klass)`, a`dom.addClass(node, klass)`, `dom.removeClass(node, klass)` (`dom` — это обычный объект, созданный командой `var dom = {};`), которые позволяют проверить, есть ли у элемента заданный CSS-класс, добавить к нему класс (если его еще нет) и удалить класс. 
 
-Учти, что у элемента может быть несколько классов, которые могут быть разделены одним или нескольким пробельными символами (пробел, `\t`, '\f' `\r`, перевод строки `\n` — все эти символы ищутся с помощью `\s` в регулярке). Ты можешь спросить, что за идиот придумал разделять классы с помощью непонятных спецсимволов типа `\f`? Не знаю, но так написано в стандарте.
+Учти, что у элемента может быть несколько классов, которые могут быть разделены одним или нескольким пробельными символами (пробел, `\t`, `\f`, `\r`, перевод строки `\n` — все эти символы ищутся с помощью `\s` в регулярке). Ты можешь спросить, что за идиот придумал разделять классы с помощью непонятных спецсимволов типа `\f`? Не знаю, но так написано в стандарте.
 
 Если удалены все классы, то удалять аттрибут `class=""` не надо, пусть остается.
 
 Примеры: 
 
-    // вспомогательная функция для создания ноды
-    function createNode(name, klasses) {  
-        var n = document.createElement(name);
-        n.className = klasses;
-        return n;
-    }
-    
-    function l(x) {
-        console.log(x);
-    }
-    
-    l(hasClass(createNode('div', 'test'), 'test')); // true
-    l(hasClass(createNode('div', 'test'), 'tes')); // false
-    
-    l(hasClass(createNode('div', 'test1 test2'), 'tes')); // false
-    l(hasClass(createNode('div', 'test1 test2'), 'test1')); // true
-    
-В современных браузерах и HTML 5 у узлов DOM есть объект classList для этого:
+```javascript
+// вспомогательная функция для создания ноды
+function createNode(name, klasses) {  
+    var n = document.createElement(name);
+    n.className = klasses;
+    return n;
+}
+
+function l(x) {
+    console.log(x);
+}
+
+l(hasClass(createNode('div', 'test'), 'test')); // true
+l(hasClass(createNode('div', 'test'), 'tes')); // false
+
+l(hasClass(createNode('div', 'test1 test2'), 'tes')); // false
+l(hasClass(createNode('div', 'test1 test2'), 'test1')); // true
+```
+
+В современных браузерах и HTML 5 у узлов DOM есть свойство `classList`:
 
 - https://developer.mozilla.org/en-US/docs/Web/API/Element.classList (англ.)
 - http://html5.by/blog/javascript-classlist-api/
@@ -654,7 +691,7 @@ Cделай плавную прокрутку при клике на якорь 
 Подсказки: 
 
 - плавная прокрутка делается анимацией свойства `scrollTop` на элементах `html` и `body` (так как в Хроме за прокрутку страницы отвечает `html`, а в других браузерах `body`)
-- не надо вешать обработчик на все ссылки кодом вроде `$('a').click` так как это неэффективно и не работает для новых добавляемых ссылок. Исплоьзуй метод `on` который ставит 1 обработчик на верх документа
+- не надо вешать обработчик на все ссылки кодом вроде `$('a').click` так как это неэффективно и не работает для новых добавляемых ссылок. Используй метод `on` который ставит 1 обработчик на верх документа
 - не забудь предотвратить обработку события браузером, иначе страница будет прыгать
 
 ### 3. addClearButton
