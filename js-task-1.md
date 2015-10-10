@@ -173,6 +173,8 @@ var fiveInABox = new Number(5);
 var five = fiveInABox.valueOf(); // ручной анбоксинг, в five лежит примитив - число 5
 ```
 
+Статья по теме на англ.: http://www.jisaacks.com/javascript-boxing/
+
 ## Задачки на JS
 
 Проверялка для первых 10 задачек от @dkab: http://dkab.github.io/jasmine-tests/ (робот не совершенен и может ошибаться. Если ты думаешь, что он не прав, напиши на codedokode@gmail.com и не забудь приложить свою программу — мы разберемся и вправим ему мозги).
