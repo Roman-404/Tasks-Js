@@ -416,13 +416,13 @@ var five = fiveInABox.valueOf(); // ручной анбоксинг, в five л�
     // добавка из майонеза
     hamburger.addTopping(Hamburger.TOPPING_MAYO);
     // спросим сколько там калорий
-    console.log("Calories: %f", hamburger.countCalories());
+    console.log("Calories: %f", hamburger.calculateCalories());
     // сколько стоит
-    console.log("Price: %f", hamburger.countPrice());
+    console.log("Price: %f", hamburger.calculatePrice());
     // я тут передумал и решил добавить еще приправу
     hamburger.addTopping(Hamburger.TOPPING_SAUCE);
     // А сколько теперь стоит? 
-    console.log("Price with sauce: %f", hamburger.countPrice());
+    console.log("Price with sauce: %f", hamburger.calculatePrice());
     ```
     
     При неправильном использовании класс сообщает об этом с помощью выброса исключения: (урок на примере PHP: https://gist.github.com/codedokode/65d43ca5ac95c762bc1a , учебник: https://learn.javascript.ru/exception )
