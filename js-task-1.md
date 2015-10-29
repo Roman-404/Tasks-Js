@@ -432,12 +432,14 @@ var five = fiveInABox.valueOf(); // ручной анбоксинг, в five л�
     var h2 = new Hamburger(); // => HamburgerException: no size given
     
     // передаем некорректные значения, добавку вместо размера
-    var h3 = new Hamburger(Hamburger.TOPPING_SAUCE, Hamburger.TOPPING_SAUCE); // => HamburgerException: invalid size 'TOPPING_SAUCE'
+    var h3 = new Hamburger(Hamburger.TOPPING_SAUCE, Hamburger.TOPPING_SAUCE); 
+    // => HamburgerException: invalid size 'TOPPING_SAUCE'
     
     // добавляем много добавок
     var h4 = new Hamburger(Hamburger.SIZE_SMALL, Hamburger.STUFFING_CHEESE);
     hamburger.addTopping(Hamburger.TOPPING_MAYO);
-    hamburger.addTopping(Hamburger.TOPPING_MAYO); // HamburgerException: duplicate topping 'TOPPING_MAYO'
+    hamburger.addTopping(Hamburger.TOPPING_MAYO); 
+    // HamburgerException: duplicate topping 'TOPPING_MAYO'
     ```
     
     Обрати внимание в коде выше на такие моменты: 
