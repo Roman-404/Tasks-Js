@@ -348,7 +348,7 @@ var five = fiveInABox.valueOf(); // ручной анбоксинг, в five л�
     console.log(pluck(characters, 'name')); // ['barney', 'fred']
     ```
 
-    Такая функция есть в lodash: http://lodash.com/docs#pluck
+    ~~Такая функция была в lodash: http://lodash.com/docs#pluck~~ но теперь вместо нее советуют использовать map: https://lodash.com/docs/4.15.0#map
     
     Функция не должна изменять исходный массив.
 
