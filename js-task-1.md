@@ -635,7 +635,7 @@ console.log(a.z); // [1, 2, 3, 4]
 Если в функцию копирования передан объект `Date`, надо создавать копию того же типа.
 
 ```javascript 
-var с = new Date(2014, 1, 1);
+var c = new Date(2014, 1, 1);
 var d = shallowCopy(c);
 d.setFullYear(2015);
 console.log(c.getFullYear()); // 2014
